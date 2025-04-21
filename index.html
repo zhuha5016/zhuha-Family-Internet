@@ -140,7 +140,7 @@
             text-align: center;
         }
 
-        /* 主界面 - 默认隐藏 */
+        /* 主界面 */
         .main-container {
             display: none;
             width: 100%;
@@ -148,231 +148,674 @@
             padding: 40px;
         }
 
-        /* 顶部导航栏 */
-        .navbar {
+        /* 侧边栏 */
+        .sidebar {
+            width: 240px;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        .user-profile {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            margin-bottom: 20px;
         }
 
-        .nav-logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #007AFF;
-        }
-
-        .nav-links {
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #007AFF;
             display: flex;
-            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
         }
 
-        .nav-link {
-            color: #1a1a1a;
+        .user-info h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .user-info p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            color: #333;
+            font-size: 14px;
+            transition: all 0.2s;
         }
 
-        .nav-link:hover {
+        .sidebar-menu a:hover {
+            background: rgba(0, 122, 255, 0.1);
             color: #007AFF;
+        }
+
+        .sidebar-menu a.active {
+            background: rgba(0, 122, 255, 0.1);
+            color: #007AFF;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            margin-left: 240px;
+            padding: 0 20px;
         }
 
         /* 欢迎区域 */
         .welcome-section {
             background: linear-gradient(135deg, #007AFF 0%, #0040FF 100%);
             color: white;
-            padding: 50px;
+            padding: 40px;
             border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 30px rgba(0, 122, 255, 0.2);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .welcome-title {
-            font-size: 36px;
-            margin-bottom: 15px;
-            font-weight: 700;
+        .welcome-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
-        .welcome-subtitle {
-            font-size: 18px;
+        .welcome-section p {
+            font-size: 16px;
             opacity: 0.9;
-            margin-bottom: 25px;
         }
 
-        /* 功能卡片 */
-        .dashboard {
+        .welcome-section .action-btn {
+            background: white;
+            color: #007AFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .welcome-section .action-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* 内容卡片 */
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .card {
             background: white;
             border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .card-icon {
-            width: 50px;
-            height: 50px;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-header h3 {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .card-header .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
             background: rgba(0, 122, 255, 0.1);
-            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .card-icon img {
-            width: 24px;
-            height: 24px;
-        }
-
-        .card-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1a1a1a;
-        }
-
-        .card-desc {
-            color: rgba(60, 60, 67, 0.7);
-            font-size: 15px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .card-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: rgba(0, 122, 255, 0.1);
             color: #007AFF;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .card-footer {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* 家庭成员管理 */
+        .member-list {
+            list-style: none;
+        }
+
+        .member-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .member-item:last-child {
+            border-bottom: none;
+        }
+
+        .member-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #007AFF;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .member-info p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .member-actions button {
+            background: none;
+            border: none;
+            color: #007AFF;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .member-actions button:hover {
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        /* 家庭设备控制 */
+        .device-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .device-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
         }
 
-        .card-btn:hover {
-            background: rgba(0, 122, 255, 0.2);
+        .device-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* 日历区域 */
-        .calendar-section {
+        .device-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .device-header h4 {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .device-toggle {
+            position: relative;
+            width: 40px;
+            height: 20px;
+        }
+
+        .device-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #007AFF;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        .device-status {
+            font-size: 12px;
+            color: #007AFF;
+            margin-top: 5px;
+        }
+
+        .device-status.off {
+            color: #ccc;
+        }
+
+        /* 家庭相册 */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 0;
+            padding-bottom: 100%; /* 正方形 */
+            background: #f0f0f0;
+        }
+
+        .photo-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 10px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .photo-item:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        /* 家庭日历 */
+        .calendar-container {
             background: white;
             border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            margin-bottom: 40px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
-        .section-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            color: #1a1a1a;
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .calendar {
+        .calendar-header h3 {
+            font-size: 18px;
+        }
+
+        .calendar-nav button {
+            background: none;
+            border: none;
+            color: #007AFF;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .calendar-days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 10px;
         }
 
-        .calendar-header {
-            font-weight: 600;
-            text-align: center;
-            padding: 10px;
-            color: #007AFF;
+        .calendar-day-header {
+            display: flex;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
         }
 
         .calendar-day {
-            background: rgba(245, 245, 247, 0.8);
+            border: 1px solid #f0f0f0;
             border-radius: 8px;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
         .calendar-day:hover {
             background: rgba(0, 122, 255, 0.1);
         }
 
-        .calendar-day.today {
-            background: #007AFF;
-            color: white;
-            font-weight: 600;
-        }
-
-        .calendar-day.event {
+        .calendar-day.has-event {
             position: relative;
         }
 
-        .calendar-day.event:after {
+        .calendar-day.has-event::after {
             content: "";
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #ff453a;
-            border-radius: 50%;
-            bottom: 8px;
+            bottom: 5px;
             left: 50%;
             transform: translateX(-50%);
-        }
-
-        /* 家庭成员区域 */
-        .family-section {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .family-members {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-        }
-
-        .family-member {
-            min-width: 150px;
-            text-align: center;
-        }
-
-        .member-avatar {
-            width: 80px;
-            height: 80px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
-            background: rgba(245, 245, 247, 0.8);
-            margin: 0 auto 15px;
-            overflow: hidden;
-            border: 3px solid rgba(0, 122, 255, 0.2);
-            transition: all 0.3s;
+            background: #007AFF;
         }
 
-        .family-member:hover .member-avatar {
-            border-color: rgba(0, 122, 255, 0.5);
-            transform: scale(1.05);
+        .calendar-day.today {
+            background: rgba(0, 122, 255, 0.1);
+            font-weight: bold;
+            color: #007AFF;
         }
 
-        .member-name {
-            font-weight: 600;
+        /* 消息通知 */
+        .notification-list {
+            list-style: none;
+        }
+
+        .notification-item {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.2s;
+        }
+
+        .notification-item:hover {
+            background: rgba(0, 122, 255, 0.05);
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(0, 122, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #007AFF;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-content h4 {
+            font-size: 14px;
             margin-bottom: 5px;
         }
 
-        .member-role {
-            color: rgba(60, 60, 67, 0.7);
+        .notification-content p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .notification-time {
+            font-size: 11px;
+            color: #999;
+            align-self: flex-start;
+        }
+
+        .notification-time.unread {
+            font-weight: bold;
+            color: #007AFF;
+        }
+
+        /* 设置 */
+        .settings-section {
+            margin-bottom: 25px;
+        }
+
+        .settings-section h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .settings-item:hover {
+            background: rgba(0, 122, 255, 0.05);
+        }
+
+        .settings-item-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .settings-item-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            background: rgba(0, 122, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #007AFF;
+            margin-right: 15px;
+        }
+
+        .settings-item-content h4 {
             font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .settings-item-content p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-size: 20px;
+        }
+
+        .modal-form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .modal-form-group input,
+        .modal-form-group textarea,
+        .modal-form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-primary {
+            background: #007AFF;
+            color: white;
+        }
+
+        /* 日程表模态框 */
+        .schedule-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 15px 0;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-time {
+            font-weight: bold;
+            color: #007AFF;
+            margin-bottom: 5px;
+        }
+
+        .schedule-title {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .schedule-location {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+            font-size: 12px;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -381,222 +824,1182 @@
     <div class="bg-animation"></div>
 
     <!-- 登录界面 -->
-    <div class="login-container" id="loginContainer">
-        <img src="https://www.apple.com.cn/ac/globalnav/7/zh_CN/images/be15095f-5a20-57ff-9c70-8d46b63f5b42/globalnav_apple_image__cxwwnrj0urau_large.svg" class="logo" alt="Logo">
-        <h1>欢迎回家</h1>
-        
-        <div class="input-group">
-            <input type="text" id="username" placeholder="用户名" autocomplete="username">
-        </div>
-        
-        <div class="input-group">
-            <input type="password" id="password" placeholder="密码" autocomplete="current-password">
-        </div>
-        
-        <div class="error-msg" id="errorMsg">用户名或密码不正确</div>
-        <button onclick="login()">登录</button>
-        
-        <p class="footer-text">家庭门户系统 © 2023</p>
+    <div class="login-container">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>家庭门户系统</h1>
+        <form id="login-form">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="用户名" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="密码" required>
+            </div>
+            <button type="submit">登录</button>
+        </form>
+        <div class="error-msg"></div>
     </div>
 
     <!-- 主界面 -->
-    <div class="main-container" id="mainContainer">
-        <!-- 导航栏 -->
-        <div class="navbar">
-            <div class="nav-logo">Family Hub</div>
-            <div class="nav-links">
-                <a href="#" class="nav-link">首页</a>
-                <a href="#" class="nav-link">日历</a>
-                <a href="#" class="nav-link">相册</a>
-                <a href="#" class="nav-link">设置</a>
+    <div class="main-container">
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="user-profile">
+                <div class="user-avatar">张</div>
+                <div class="user-info">
+                    <h3>张三</h3>
+                    <p>管理员</p>
+                </div>
             </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" onclick="showSection('welcome-section'); return false;"><i>🏠</i> 首页</a></li>
+                <li><a href="#" onclick="showSection('family-members'); return false;"><i>👥</i> 家庭成员</a></li>
+                <li><a href="#" onclick="showSection('devices-section'); return false;"><i>🔌</i> 家庭设备</a></li>
+                <li><a href="#" onclick="showSection('photos-section'); return false;"><i>🖼️</i> 家庭相册</a></li>
+                <li><a href="#" onclick="showSection('calendar-section'); return false;"><i>📅</i> 家庭日历</a></li>
+                <li><a href="#" onclick="showSection('notifications-section'); return false;"><i>🔔</i> 消息通知</a></li>
+                <li><a href="#" onclick="showSection('settings-section'); return false;"><i>⚙️</i> 系统设置</a></li>
+            </ul>
         </div>
 
-        <!-- 欢迎区域 -->
-        <div class="welcome-section">
-            <h2 class="welcome-title">欢迎回家, <span id="welcomeName">家人</span>!</h2>
-            <p class="welcome-subtitle">今天是美好的一天，让我们一起享受家庭时光</p>
-        </div>
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 欢迎区域 -->
+            <div id="welcome-section" class="content-section">
+                <div class="welcome-section">
+                    <h2>欢迎回家，张三！</h2>
+                    <p>今天是 <span id="current-date">2025年1月21日</span>，气温宜人，适合外出活动。</p>
+                    <p>您有 <b>2条新消息</b> 和 <b>1个待办事项</b>。</p>
+                    <button class="action-btn" onclick="showModal('add-event-modal')">添加新日程</button>
+                </div>
 
-        <!-- 功能卡片 -->
-        <div class="dashboard">
-            <div class="card">
-                <div class="card-icon">
-                    <img src="https://img.icons8.com/ios/50/007AFF/calendar--v1.png" alt="日历">
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>家庭日程</h3>
+                            <div class="card-icon">📅</div>
+                        </div>
+                        <div class="card-content">
+                            <div class="schedule-item">
+                                <div class="schedule-time">今天 14:30</div>
+                                <div class="schedule-title">家庭会议</div>
+                                <div class="schedule-location">客厅</div>
+                            </div>
+                            <div class="schedule-item">
+                                <div class="schedule-time">明天 09:00</div>
+                                <div class="schedule-title">李四医生预约</div>
+                                <div class="schedule-location">人民医院</div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span>2个日程</span>
+                            <a href="#" onclick="showSection('calendar-section'); return false;">查看全部</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>设备状态</h3>
+                            <div class="card-icon">🔌</div>
+                        </div>
+                        <div class="card-content">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>智能灯光</span>
+                                <span class="device-status">开启</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>空调</span>
+                                <span class="device-status">关闭</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>温湿度</span>
+                                <span>24°C / 45%</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span>8个设备</span>
+                            <a href="#" onclick="showSection('devices-section'); return false;">查看全部</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>家庭成员</h3>
+                            <div class="card-icon">👥</div>
+                        </div>
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <span style="width: 25px; height: 25px; border-radius: 50%; background: #007AFF; color: white; display: flex; align-items: center; justify-content: center; margin-right: 10px;">张</span>
+                                <span>张三</span>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <span style="width: 25px; height: 25px; border-radius: 50%; background: #FF5757; color: white; display: flex; align-items: center; justify-content: center; margin-right: 10px;">李</span>
+                                <span>李四</span>
+                            </div>
+                            <div style="display: flex; align-items: center;">
+                                <span style="width: 25px; height: 25px; border-radius: 50%; background: #57FF8C; color: white; display: flex; align-items: center; justify-content: center; margin-right: 10px;">王</span>
+                                <span>王五</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span>3位成员</span>
+                            <a href="#" onclick="showSection('family-members'); return false;">查看全部</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>近期消息</h3>
+                            <div class="card-icon">🔔</div>
+                        </div>
+                        <div class="card-content" style="font-size: 13px; color: #666;">
+                            <div style="margin-bottom: 10px;">
+                                <span style="font-weight: bold;">李四</span> 提醒您：明早有家庭早餐
+                            </div>
+                            <div>
+                                系统通知：家庭设备更新已完成
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <span>5条消息</span>
+                            <a href="#" onclick="showSection('notifications-section'); return false;">查看全部</a>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="card-title">家庭日历</h3>
-                <p class="card-desc">查看和管理家庭成员的日程安排，不错过任何重要事件</p>
-                <a href="#" class="card-btn">查看日历</a>
             </div>
-            
-            <div class="card">
-                <div class="card-icon">
-                    <img src="https://img.icons8.com/ios/50/007AFF/family.png" alt="家庭">
+
+            <!-- 家庭成员管理 -->
+            <div id="family-members" class="content-section" style="display: none;">
+                <h2>家庭成员管理</h2>
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+                    <p>管理您的家庭成员，设置权限和通知</p>
+                    <button onclick="showModal('add-member-modal')" style="background: #007AFF; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">添加成员</button>
                 </div>
-                <h3 class="card-title">家庭相册</h3>
-                <p class="card-desc">珍藏家庭美好时刻，与家人共享珍贵回忆</p>
-                <a href="#" class="card-btn">浏览照片</a>
+
+                <ul class="member-list">
+                    <li class="member-item">
+                        <div class="member-avatar">张</div>
+                        <div class="member-info">
+                            <h4>张三</h4>
+                            <p>管理员</p>
+                        </div>
+                        <div class="member-actions">
+                            <button onclick="editMember('张三')">编辑</button>
+                            <button onclick="deleteMember('张三')">删除</button>
+                        </div>
+                    </li>
+                    <li class="member-item">
+                        <div class="member-avatar" style="background: #FF5757;">李</div>
+                        <div class="member-info">
+                            <h4>李四</h4>
+                            <p>高级成员</p>
+                        </div>
+                        <div class="member-actions">
+                            <button onclick="editMember('李四')">编辑</button>
+                            <button onclick="deleteMember('李四')">删除</button>
+                        </div>
+                    </li>
+                    <li class="member-item">
+                        <div class="member-avatar" style="background: #57FF8C;">王</div>
+                        <div class="member-info">
+                            <h4>王五</h4>
+                            <p>普通成员</p>
+                        </div>
+                        <div class="member-actions">
+                            <button onclick="editMember('王五')">编辑</button>
+                            <button onclick="deleteMember('王五')">删除</button>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            
-            <div class="card">
-                <div class="card-icon">
-                    <img src="https://img.icons8.com/ios/50/007AFF/shopping-cart.png" alt="购物">
+
+            <!-- 家庭设备控制 -->
+            <div id="devices-section" class="content-section" style="display: none;">
+                <h2>家庭设备控制</h2>
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <p>远程控制您的家庭智能设备</p>
+                    <button onclick="showModal('add-device-modal')" style="background: #007AFF; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">添加设备</button>
                 </div>
-                <h3 class="card-title">家庭购物清单</h3>
-                <p class="card-desc">共同管理家庭购物需求，实时同步更新</p>
-                <a href="#" class="card-btn">查看清单</a>
+
+                <div class="device-grid">
+                    <div class="device-item">
+                        <div class="device-header">
+                            <h4>客厅灯光</h4>
+                            <label class="device-toggle">
+                                <input type="checkbox" checked onchange="toggleDevice('living-room-lights', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="device-status">已开启</div>
+                    </div>
+
+                    <div class="device-item">
+                        <div class="device-header">
+                            <h4>卧室灯光</h4>
+                            <label class="device-toggle">
+                                <input type="checkbox" onchange="toggleDevice('bedroom-lights', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="device-status off">已关闭</div>
+                    </div>
+
+                    <div class="device-item">
+                        <div class="device-header">
+                            <h4>空调</h4>
+                            <label class="device-toggle">
+                                <input type="checkbox" onchange="toggleDevice('air-conditioner', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="device-status off">已关闭</div>
+                    </div>
+
+                    <div class="device-item">
+                        <div class="device-header">
+                            <h4>电视</h4>
+                            <label class="device-toggle">
+                                <input type="checkbox" onchange="toggleDevice('tv', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="device-status off">已关闭</div>
+                    </div>
+
+                    <div class="device-item">
+                        <div class="device-header">
+                            <h4>智能门锁</h4>
+                            <label class="device-toggle">
+                                <input type="checkbox" checked onchange="toggleDevice('smart-lock', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="device-status">已开启</div>
+                    </div>
+
+                    <div class="device-item">
+                        <div class="device-header">
+                            <h4>加湿器</h4>
+                            <label class="device-toggle">
+                                <input type="checkbox" onchange="toggleDevice('humidifier', this.checked)">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="device-status off">已关闭</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                    <h3 style="margin-bottom: 15px;">设备状态统计</h3>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div style="text-align: center;">
+                            <h4 style="font-size: 24px; color: #007AFF;">3</h4>
+                            <p style="font-size: 12px; color: #666;">已开启</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="font-size: 24px; color: #ccc;">3</h4>
+                            <p style="font-size: 12px; color: #666;">已关闭</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="font-size: 24px; color: #666;">6</h4>
+                            <p style="font-size: 12px; color: #666;">总设备</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="card">
-                <div class="card-icon">
-                    <img src="https://img.icons8.com/ios/50/007AFF/meal.png" alt="餐食">
+
+            <!-- 家庭相册 -->
+            <div id="photos-section" class="content-section" style="display: none;">
+                <h2>家庭相册</h2>
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+                    <p>记录家庭美好瞬间</p>
+                    <button onclick="showModal('add-photo-modal')" style="background: #007AFF; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">上传照片</button>
                 </div>
-                <h3 class="card-title">本周食谱</h3>
-                <p class="card-desc">规划家庭健康饮食，让每一餐都充满爱</p>
-                <a href="#" class="card-btn">查看食谱</a>
+
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <img src="https://via.placeholder.com/400x400" alt="家庭照片">
+                        <div class="photo-overlay">2024年家庭聚会</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://via.placeholder.com/400x400" alt="家庭照片">
+                        <div class="photo-overlay">王五的生日</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://via.placeholder.com/400x400" alt="家庭照片">
+                        <div class="photo-overlay">春季郊游</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://via.placeholder.com/400x400" alt="家庭照片">
+                        <div class="photo-overlay">新年晚餐</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://via.placeholder.com/400x400" alt="家庭照片">
+                        <div class="photo-overlay">李四的毕业典礼</div>
+                    </div>
+                    <div class="photo-item">
+                        <img src="https://via.placeholder.com/400x400" alt="家庭照片">
+                        <div class="photo-overlay">周末野餐</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="margin-bottom: 15px;">相册分类</h3>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">全部</span>
+                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">节日</span>
+                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">生日</span>
+                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">旅行</span>
+                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">聚会</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 家庭日历 -->
+            <div id="calendar-section" class="content-section" style="display: none;">
+                <h2>家庭日历</h2>
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between;">
+                    <p>管理家庭日程和活动</p>
+                    <button onclick="showModal('add-event-modal')" style="background: #007AFF; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">新建日程</button>
+                </div>
+
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h3 id="calendar-month">2025年1月</h3>
+                        <div class="calendar-nav">
+                            <button onclick="prevMonth()">◀</button>
+                            <button onclick="nextMonth()">▶</button>
+                        </div>
+                    </div>
+
+                    <div class="calendar-days">
+                        <div class="calendar-day-header">周日</div>
+                        <div class="calendar-day-header">周一</div>
+                        <div class="calendar-day-header">周二</div>
+                        <div class="calendar-day-header">周三</div>
+                        <div class="calendar-day-header">周四</div>
+                        <div class="calendar-day-header">周五</div>
+                        <div class="calendar-day-header">周六</div>
+
+                        <!-- 日历天数将通过JavaScript动态生成 -->
+                        <div id="calendar-days-container"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="margin-bottom: 15px;">待办事项</h3>
+                    <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <input type="checkbox" style="margin-right: 10px;">
+                            <span style="font-size: 14px;">购买生日蛋糕</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <input type="checkbox" style="margin-right: 10px;">
+                            <span style="font-size: 14px;">储备家庭聚会食材</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" style="margin-right: 10px;">
+                            <span style="font-size: 14px;">预约体检</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 消息通知 -->
+            <div id="notifications-section" class="content-section" style="display: none;">
+                <h2>消息通知</h2>
+                <div style="margin-bottom: 20px;">
+                    <p>查看家庭成员发送的消息和系统通知</p>
+                </div>
+
+                <ul class="notification-list">
+                    <li class="notification-item" onclick="markAsRead(1)">
+                        <div class="notification-icon">📧</div>
+                        <div class="notification-content">
+                            <h4>李四</h4>
+                            <p>明早有家庭早餐，请准时参加</p>
+                        </div>
+                        <div class="notification-time unread">10分钟前</div>
+                    </li>
+                    <li class="notification-item" onclick="markAsRead(2)">
+                        <div class="notification-icon">🔔</div>
+                        <div class="notification-content">
+                            <h4>系统</h4>
+                            <p>家庭设备更新已完成</p>
+                        </div>
+                        <div class="notification-time unread">1小时前</div>
+                    </li>
+                    <li class="notification-item" onclick="markAsRead(3)">
+                        <div class="notification-icon">👤</div>
+                        <div class="notification-content">
+                            <h4>王五</h4>
+                            <p>我已经安全到家</p>
+                        </div>
+                        <div class="notification-time">昨天</div>
+                    </li>
+                    <li class="notification-item" onclick="markAsRead(4)">
+                        <div class="notification-icon">🔄</div>
+                        <div class="notification-content">
+                            <h4>系统</h4>
+                            <p>家庭网络已连接</p>
+                        </div>
+                        <div class="notification-time">前天</div>
+                    </li>
+                    <li class="notification-item" onclick="markAsRead(5)">
+                        <div class="notification-icon">🛒</div>
+                        <div class="notification-content">
+                            <h4>张三</h4>
+                            <p>我已购买了家庭所需用品</p>
+                        </div>
+                        <div class="notification-time">3天前</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 系统设置 -->
+            <div id="settings-section" class="content-section" style="display: none;">
+                <h2>系统设置</h2>
+                <div style="margin-bottom: 20px;">
+                    <p>配置您的家庭门户系统</p>
+                </div>
+
+                <div class="settings-section">
+                    <h3>账户设置</h3>
+                    <div class="settings-item" onclick="showModal('profile-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">👤</div>
+                            <div class="settings-item-content">
+                                <h4>个人信息</h4>
+                                <p>修改您的个人资料</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                    <div class="settings-item" onclick="showModal('password-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">🔒</div>
+                            <div class="settings-item-content">
+                                <h4>密码设置</h4>
+                                <p>更改您的登录密码</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>通知设置</h3>
+                    <div class="settings-item" onclick="showModal('notification-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">🔔</div>
+                            <div class="settings-item-content">
+                                <h4>消息通知</h4>
+                                <p>管理通知类型和偏好</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                    <div class="settings-item" onclick="showModal('email-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">📧</div>
+                            <div class="settings-item-content">
+                                <h4>邮件设置</h4>
+                                <p>配置邮件通知</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>系统偏好</h3>
+                    <div class="settings-item" onclick="toggleTheme()">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">🌙</div>
+                            <div class="settings-item-content">
+                                <h4>深色模式</h4>
+                                <p>开启/关闭深色主题</p>
+                            </div>
+                        </div>
+                        <label class="device-toggle">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item" onclick="showModal('language-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">🌐</div>
+                            <div class="settings-item-content">
+                                <h4>语言设置</h4>
+                                <p>更改系统语言</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <div class="footer">
+                <p>© 2025 家庭门户系统 - 连接您的家庭</p>
             </div>
         </div>
+    </div>
 
-        <!-- 日历区域 -->
-        <div class="calendar-section">
-            <h3 class="section-title">本月家庭日程</h3>
-            <div class="calendar">
-                <div class="calendar-header">日</div>
-                <div class="calendar-header">一</div>
-                <div class="calendar-header">二</div>
-                <div class="calendar-header">三</div>
-                <div class="calendar-header">四</div>
-                <div class="calendar-header">五</div>
-                <div class="calendar-header">六</div>
-                
-                <!-- 日历日期 - 示例 -->
-                <div class="calendar-day">28</div>
-                <div class="calendar-day">29</div>
-                <div class="calendar-day">30</div>
-                <div class="calendar-day">31</div>
-                <div class="calendar-day">1</div>
-                <div class="calendar-day">2</div>
-                <div class="calendar-day">3</div>
-                
-                <div class="calendar-day">4</div>
-                <div class="calendar-day">5</div>
-                <div class="calendar-day">6</div>
-                <div class="calendar-day">7</div>
-                <div class="calendar-day">8</div>
-                <div class="calendar-day">9</div>
-                <div class="calendar-day">10</div>
-                
-                <div class="calendar-day">11</div>
-                <div class="calendar-day event">12</div>
-                <div class="calendar-day">13</div>
-                <div class="calendar-day">14</div>
-                <div class="calendar-day">15</div>
-                <div class="calendar-day">16</div>
-                <div class="calendar-day">17</div>
-                
-                <div class="calendar-day">18</div>
-                <div class="calendar-day">19</div>
-                <div class="calendar-day">20</div>
-                <div class="calendar-day event">21</div>
-                <div class="calendar-day">22</div>
-                <div class="calendar-day">23</div>
-                <div class="calendar-day">24</div>
-                
-                <div class="calendar-day today">25</div>
-                <div class="calendar-day">26</div>
-                <div class="calendar-day">27</div>
-                <div class="calendar-day">28</div>
-                <div class="calendar-day">29</div>
-                <div class="calendar-day">30</div>
-                <div class="calendar-day">1</div>
+    <!-- 模态框 - 添加家庭成员 -->
+    <div id="add-member-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('add-member-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>添加家庭成员</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="member-name">姓名</label>
+                    <input type="text" id="member-name" placeholder="请输入成员姓名">
+                </div>
+                <div class="modal-form-group">
+                    <label for="member-phone">手机号</label>
+                    <input type="tel" id="member-phone" placeholder="请输入手机号">
+                </div>
+                <div class="modal-form-group">
+                    <label for="member-role">成员角色</label>
+                    <select id="member-role">
+                        <option value="admin">管理员</option>
+                        <option value="advanced">高级成员</option>
+                        <option value="basic">普通成员</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('add-member-modal')">取消</button>
+                <button class="btn-primary" onclick="addMember()">添加</button>
             </div>
         </div>
+    </div>
 
-        <!-- 家庭成员区域 -->
-        <div class="family-section">
-            <h3 class="section-title">家庭成员</h3>
-            <div class="family-members">
-                <div class="family-member">
-                    <div class="member-avatar">
-                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-male-circle.png" alt="爸爸">
-                    </div>
-                    <div class="member-name">爸爸</div>
-                    <div class="member-role">管理员</div>
+    <!-- 模态框 - 添加设备 -->
+    <div id="add-device-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('add-device-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>添加新设备</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="device-name">设备名称</label>
+                    <input type="text" id="device-name" placeholder="请输入设备名称">
                 </div>
-                
-                <div class="family-member">
-                    <div class="member-avatar">
-                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-female-circle.png" alt="妈妈">
-                    </div>
-                    <div class="member-name">妈妈</div>
-                    <div class="member-role">管理员</div>
+                <div class="modal-form-group">
+                    <label for="device-type">设备类型</label>
+                    <select id="device-type">
+                        <option value="light">灯光</option>
+                        <option value="climate">气候控制</option>
+                        <option value="security">安全设备</option>
+                        <option value="entertainment">娱乐设备</option>
+                        <option value="other">其他</option>
+                    </select>
                 </div>
-                
-                <div class="family-member">
-                    <div class="member-avatar">
-                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-male-circle.png" alt="小明">
-                    </div>
-                    <div class="member-name">小明</div>
-                    <div class="member-role">成员</div>
+                <div class="modal-form-group">
+                    <label for="device-location">位置</label>
+                    <input type="text" id="device-location" placeholder="例如：客厅、卧室">
                 </div>
-                
-                <div class="family-member">
-                    <div class="member-avatar">
-                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-female-circle.png" alt="小红">
-                    </div>
-                    <div class="member-name">小红</div>
-                    <div class="member-role">成员</div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('add-device-modal')">取消</button>
+                <button class="btn-primary" onclick="addDevice()">添加</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 添加照片 -->
+    <div id="add-photo-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('add-photo-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>上传新照片</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="photo-title">照片标题</label>
+                    <input type="text" id="photo-title" placeholder="请输入照片标题">
                 </div>
-                
-                <div class="family-member">
-                    <div class="member-avatar">
-                        <img src="https://img.icons8.com/ios-filled/50/007AFF/dog.png" alt="旺财">
-                    </div>
-                    <div class="member-name">旺财</div>
-                    <div class="member-role">宠物</div>
+                <div class="modal-form-group">
+                    <label for="photo-description">照片描述</label>
+                    <textarea id="photo-description" placeholder="请输入照片描述" style="height: 100px;"></textarea>
                 </div>
+                <div class="modal-form-group">
+                    <label for="photo-upload">选择照片</label>
+                    <input type="file" id="photo-upload" accept="image/*">
+                </div>
+                <div class="modal-form-group">
+                    <label for="photo-album">相册</label>
+                    <select id="photo-album">
+                        <option value="all">全部</option>
+                        <option value="holidays">节日</option>
+                        <option value="birthdays">生日</option>
+                        <option value="travel">旅行</option>
+                        <option value="parties">聚会</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('add-photo-modal')">取消</button>
+                <button class="btn-primary" onclick="addPhoto()">上传</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 添加日程 -->
+    <div id="add-event-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('add-event-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>新建日程</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="event-title">日程标题</label>
+                    <input type="text" id="event-title" placeholder="请输入日程标题">
+                </div>
+                <div class="modal-form-group">
+                    <label for="event-date">日期</label>
+                    <input type="date" id="event-date">
+                </div>
+                <div class="modal-form-group">
+                    <label for="event-time">时间</label>
+                    <input type="time" id="event-time">
+                </div>
+                <div class="modal-form-group">
+                    <label for="event-location">地点</label>
+                    <input type="text" id="event-location" placeholder="请输入地点">
+                </div>
+                <div class="modal-form-group">
+                    <label for="event-description">详细描述</label>
+                    <textarea id="event-description" placeholder="请输入日程详细描述" style="height: 100px;"></textarea>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('add-event-modal')">取消</button>
+                <button class="btn-primary" onclick="addEvent()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 个人信息设置 -->
+    <div id="profile-settings-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('profile-settings-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>个人信息设置</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="profile-name">姓名</label>
+                    <input type="text" id="profile-name" value="张三">
+                </div>
+                <div class="modal-form-group">
+                    <label for="profile-email">邮箱</label>
+                    <input type="email" id="profile-email" value="zhangsan@example.com">
+                </div>
+                <div class="modal-form-group">
+                    <label for="profile-phone">手机号</label>
+                    <input type="tel" id="profile-phone" value="13800138000">
+                </div>
+                <div class="modal-form-group">
+                    <label for="profile-address">地址</label>
+                    <input type="text" id="profile-address" value="北京市朝阳区">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('profile-settings-modal')">取消</button>
+                <button class="btn-primary" onclick="saveProfile()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 密码设置 -->
+    <div id="password-settings-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('password-settings-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>更改密码</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="current-password">当前密码</label>
+                    <input type="password" id="current-password" placeholder="请输入当前密码">
+                </div>
+                <div class="modal-form-group">
+                    <label for="new-password">新密码</label>
+                    <input type="password" id="new-password" placeholder="请输入新密码">
+                </div>
+                <div class="modal-form-group">
+                    <label for="confirm-password">确认新密码</label>
+                    <input type="password" id="confirm-password" placeholder="请再次输入新密码">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('password-settings-modal')">取消</button>
+                <button class="btn-primary" onclick="changePassword()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 通知设置 -->
+    <div id="notification-settings-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('notification-settings-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>通知设置</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label>通知类型</label>
+                    <div style="margin-top: 10px;">
+                        <label class="device-toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">家庭成员消息</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label class="device-toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">家庭设备状态</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label class="device-toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">日程提醒</span>
+                    </div>
+                </div>
+                <div class="modal-form-group">
+                    <label>通知时间</label>
+                    <div style="margin-top: 10px;">
+                        <label class="device-toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">每天 8:00-22:00</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label class="device-toggle">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">全天通知</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('notification-settings-modal')">取消</button>
+                <button class="btn-primary" onclick="saveNotificationSettings()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 邮件设置 -->
+    <div id="email-settings-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('email-settings-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>邮件设置</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label for="email-address">邮箱地址</label>
+                    <input type="email" id="email-address" value="zhangsan@example.com">
+                </div>
+                <div class="modal-form-group">
+                    <label>邮件通知</label>
+                    <div style="margin-top: 10px;">
+                        <label class="device-toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">启用邮件通知</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label class="device-toggle">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">发送每日摘要</span>
+                    </div>
+                </div>
+                <div class="modal-form-group">
+                    <label for="email-frequency">发送频率</label>
+                    <select id="email-frequency">
+                        <option value="daily">每天</option>
+                        <option value="weekly">每周</option>
+                        <option value="monthly">每月</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('email-settings-modal')">取消</button>
+                <button class="btn-primary" onclick="saveEmailSettings()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 - 语言设置 -->
+    <div id="language-settings-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('language-settings-modal')">&times;</button>
+            <div class="modal-header">
+                <h3>语言设置</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-form-group">
+                    <label>选择语言</label>
+                    <div style="margin-top: 10px;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="language" value="zh" checked>
+                            <span style="margin-left: 10px;">简体中文</span>
+                        </label>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <label style="display: flex; align-items: center;">
+                            <input type="radio" name="language" value="en">
+                            <span style="margin-left: 10px;">English</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal('language-settings-modal')">取消</button>
+                <button class="btn-primary" onclick="saveLanguageSettings()">保存</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 预定义用户数据
-        const users = [
-            { username: 'zhuha', password: 'zhuha106424', role: 'Admin', name: '管理员' },
-            { username: 'test1', password: 'test1', role: 'User', name: '测试用户1' },
-            { username: 'test2', password: 'test2', role: 'User', name: '测试用户2' }
-        ];
-
-        function login() {
-            const username = document.getElementById('username').value.trim();
+        // 登录功能
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const errorMsg = document.getElementById('errorMsg');
 
-            // 查找匹配用户
-            const user = users.find(u => u.username === username && u.password === password);
+            if (!username || !password) {
+                document.querySelector('.error-msg').style.display = 'block';
+                document.querySelector('.error-msg').innerText = '用户名或密码不能为空';
+                return;
+            }
 
-            if (user) {
-                errorMsg.style.display = 'none';
+            // 模拟登录成功
+            document.querySelector('.login-container').style.display = 'none';
+            document.querySelector('.main-container').style.display = 'block';
+        });
+
+        // 显示/隐藏内容区域
+        function showSection(sectionId) {
+            // 更新侧边栏选中状态
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.sidebar-menu a[onclick="showSection('${sectionId}'); return false;"]`).classList.add('active');
+
+            // 更新内容区域显示
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // 显示模态框
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        // 关闭模态框
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // 添加家庭成员
+        function addMember() {
+            const name = document.getElementById('member-name').value;
+            if (!name) {
+                alert('请输入成员姓名');
+                return;
+            }
+
+            // 这里应该有发送到服务器的代码
+            alert(`已添加成员: ${name}`);
+            closeModal('add-member-modal');
+            
+            // 模拟刷新列表
+            const memberList = document.getElementById('family-members').querySelector('.member-list');
+            const newMember = document.createElement('li');
+            newMember.className = 'member-item';
+            newMember.innerHTML = `
+                <div class="member-avatar" style="background: #${Math.floor(Math.random()*16777215).toString(16).padStart(6, '0')};">${name.charAt(0)}</div>
+                <div class="member-info">
+                    <h4>${name}</h4>
+                    <p>新成员</p>
+                </div>
+                <div class="member-actions">
+                    <button onclick="editMember('${name}')">编辑</button>
+                    <button onclick="deleteMember('${name}')">删除</button>
+                </div>
+            `;
+            memberList.appendChild(newMember);
+        }
+
+        // 编辑家庭成员
+        function editMember(name) {
+            alert(`编辑成员: ${name}`);
+            // 这里可以打开编辑成员的模态框
+        }
+
+        // 删除家庭成员
+        function deleteMember(name) {
+            if (confirm(`确定要删除成员: ${name} 吗？`)) {
+                alert(`已删除成员: ${name}`);
+                // 这里应该有发送到服务器的代码
                 
-                // 显示欢迎信息
-                document.getElementById('welcomeName').textContent = user.name;
-                
-                // 切换界面
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('mainContainer').style.display = 'block';
-                
-                // 根据角色显示不同内容
-                if(user.role === 'Admin') {
-                    // 管理员特有功能可以在这里添加
+                // 模拟从列表中删除
+                const memberItem = document.querySelector(`.member-item h4:contains("${name}")`).closest('.member-item');
+                if (memberItem) {
+                    memberItem.remove();
                 }
-            } else {
-                errorMsg.style.display = 'block';
             }
         }
 
-        // 添加回车键登录功能
-        document.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') login();
+        // 切换设备状态
+        function toggleDevice(deviceId, status) {
+            const statusElement = document.querySelector(`.device-item:nth-child(${Math.floor(Math.random() * 6) + 1}) .device-status`);
+            if (statusElement) {
+                statusElement.textContent = status ? '已开启' : '已关闭';
+                statusElement.className = status ? 'device-status' : 'device-status off';
+                alert(`${deviceId} 已${status ? '开启' : '关闭'}`);
+                // 这里应该有发送到服务器的代码
+            }
+        }
+
+        // 添加新设备
+        function addDevice() {
+            const name = document.getElementById('device-name').value;
+            if (!name) {
+                alert('请输入设备名称');
+                return;
+            }
+
+            // 这里应该有发送到服务器的代码
+            alert(`已添加设备: ${name}`);
+            closeModal('add-device-modal');
+            
+            // 模拟刷新列表
+            const deviceGrid = document.getElementById('devices-section').querySelector('.device-grid');
+            const newDevice = document.createElement('div');
+            newDevice.className = 'device-item';
+            newDevice.innerHTML = `
+                <div class="device-header">
+                    <h4>${name}</h4>
+                    <label class="device-toggle">
+                        <input type="checkbox" onchange="toggleDevice('${name}', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="device-status off">已关闭</div>
+            `;
+            deviceGrid.appendChild(newDevice);
+        }
+
+        // 添加照片
+        function addPhoto() {
+            const title = document.getElementById('photo-title').value;
+            if (!title) {
+                alert('请输入照片标题');
+                return;
+            }
+
+            // 这里应该有发送到服务器的代码
+            alert(`已上传照片: ${title}`);
+            closeModal('add-photo-modal');
+            
+            // 模拟刷新照片列表
+            const photoGrid = document.getElementById('photos-section').querySelector('.photo-grid');
+            const newPhoto = document.createElement('div');
+            newPhoto.className = 'photo-item';
+            newPhoto.innerHTML = `
+                <img src="https://via.placeholder.com/400x400" alt="${title}">
+                <div class="photo-overlay">${title}</div>
+            `;
+            photoGrid.appendChild(newPhoto);
+        }
+
+        // 添加日程
+        function addEvent() {
+            const title = document.getElementById('event-title').value;
+            const date = document.getElementById('event-date').value;
+            const time = document.getElementById('event-time').value;
+            const location = document.getElementById('event-location').value;
+            const description = document.getElementById('event-description').value;
+
+            if (!title || !date || !time) {
+                alert('请填写完整的日程信息');
+                return;
+            }
+
+            // 这里应该有发送到服务器的代码
+            alert(`已添加日程: ${title}`);
+            closeModal('add-event-modal');
+            
+            // 更新日历显示
+            updateCalendar();
+        }
+
+        // 生成日历
+        function updateCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            document.getElementById('calendar-month').innerText = `${year}年${month}月`;
+            
+            const daysInMonth = new Date(year, month, 0).getDate();
+            const firstDay = new Date(year, month - 1, 1).getDay();
+            
+            const calendarDays = document.getElementById('calendar-days-container');
+            calendarDays.innerHTML = '';
+            
+            // 添加上个月的日期
+            for (let i = 0; i < firstDay; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.innerText = daysInMonth - firstDay + i + 1;
+                calendarDays.appendChild(day);
+            }
+            
+            // 添加当月的日期
+            const events = [
+                { date: 10, title: '家庭会议' },
+                { date: 15, title: '医生预约' }
+            ];
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.innerText = i;
+                
+                // 标记今天
+                if (i === now.getDate() && month === now.getMonth() + 1) {
+                    day.classList.add('today');
+                }
+                
+                // 标记有日程的日期
+                if (events.some(event => event.date === i)) {
+                    day.classList.add('has-event');
+                }
+                
+                calendarDays.appendChild(day);
+            }
+            
+            // 添加下个月的日期
+            const daysToAdd = 42 - (firstDay + daysInMonth);
+            for (let i = 1; i <= daysToAdd; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.innerText = i;
+                calendarDays.appendChild(day);
+            }
+        }
+
+        // 上个月
+        function prevMonth() {
+            alert('切换到上个月');
+            // 这里应该有更新日历的代码
+            updateCalendar();
+        }
+
+        // 下个月
+        function nextMonth() {
+            alert('切换到下个月');
+            // 这里应该有更新日历的代码
+            updateCalendar();
+        }
+
+        // 标记消息为已读
+        function markAsRead(notificationId) {
+            document.querySelectorAll('.notification-time.unread').forEach((time, index) => {
+                if (index === notificationId - 1) {
+                    time.classList.remove('unread');
+                }
+            });
+        }
+
+        // 保存个人资料
+        function saveProfile() {
+            alert('个人资料已保存');
+            closeModal('profile-settings-modal');
+        }
+
+        // 更改密码
+        function changePassword() {
+            const current = document.getElementById('current-password').value;
+            const newPass = document.getElementById('new-password').value;
+            const confirm = document.getElementById('confirm-password').value;
+            
+            if (!current || !newPass || !confirm) {
+                alert('请填写完整的密码信息');
+                return;
+            }
+            
+            if (newPass !== confirm) {
+                alert('新密码和确认密码不一致');
+                return;
+            }
+            
+            alert('密码已更改');
+            closeModal('password-settings-modal');
+        }
+
+        // 保存通知设置
+        function saveNotificationSettings() {
+            alert('通知设置已保存');
+            closeModal('notification-settings-modal');
+        }
+
+        // 保存邮件设置
+        function saveEmailSettings() {
+            alert('邮件设置已保存');
+            closeModal('email-settings-modal');
+        }
+
+        // 保存语言设置
+        function saveLanguageSettings() {
+            alert('语言设置已保存');
+            closeModal('language-settings-modal');
+        }
+
+        // 切换主题
+        function toggleTheme() {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const isDarkMode = darkModeToggle.checked;
+            
+            // 这里应该有切换主题的代码
+            alert(`深色模式 ${isDarkMode ? '已开启' : '已关闭'}`);
+        }
+
+        // 退出登录
+        function logout() {
+            document.querySelector('.login-container').style.display = 'block';
+            document.querySelector('.main-container').style.display = 'none';
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 显示当前日期
+            const now = new Date();
+            document.getElementById('current-date').innerText = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`;
+            
+            // 初始化日历
+            updateCalendar();
         });
     </script>
 </body>
