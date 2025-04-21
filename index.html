@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统登录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            backdrop-filter: blur(10px);
+        }
+
+        .apple-logo {
+            width: 40px;
+            margin-bottom: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007AFF;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #007AFF;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #0063CC;
+        }
+
+        .error-msg {
+            color: #ff453a;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 30px;
+            font-size: 13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="https://www.apple.com.cn/ac/globalnav/7/zh_CN/images/be15095f-5a20-57ff-9c70-8d46b63f5b42/globalnav_apple_image__cxwwnrj0urau_large.svg" class="apple-logo" alt="Logo">
+        <h1>登录系统</h1>
+        
+        <div class="input-group">
+            <input type="text" id="username" placeholder="用户名" autocomplete="username">
+        </div>
+        
+        <div class="input-group">
+            <input type="password" id="password" placeholder="密码" autocomplete="current-password">
+        </div>
+        
+        <div class="error-msg" id="errorMsg">用户名或密码不正确</div>
+        <button onclick="login()">登录</button>
+        
+        <p class="footer-text">您的账号将用于访问所有系统服务</p>
+    </div>
+
+    <script>
+        // 预定义用户数据
+        const users = [
+            { username: 'zhuha', password: 'zhuha106424', role: 'Admin' },
+            { username: 'test1', password: 'test1', role: 'User' },
+            { username: 'test2', password: 'test2', role: 'User' }
+        ];
+
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            // 查找匹配用户
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                errorMsg.style.display = 'none';
+                alert(`登录成功！欢迎 ${user.username}（${user.role}）`);
+                // 根据角色跳转到不同页面（示例）
+                if(user.role === 'Admin') {
+                    window.location.href = 'admin_dashboard.html';
+                } else {
+                    window.location.href = 'user_dashboard.html';
+                }
+            } else {
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // 添加回车键登录功能
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') login();
+        });
+    </script>
+</body>
+</html>
