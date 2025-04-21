@@ -166,6 +166,7 @@
             padding: 15px 0;
             border-bottom: 1px solid #f0f0f0;
             margin-bottom: 20px;
+            cursor: pointer;
         }
 
         .user-avatar {
@@ -516,6 +517,27 @@
             opacity: 1;
         }
 
+        .album-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .album-filter {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .album-filter.active {
+            background: #007AFF;
+            color: white;
+        }
+
         /* 家庭日历 */
         .calendar-container {
             background: white;
@@ -702,6 +724,50 @@
             color: #666;
         }
 
+        /* 个人信息 */
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .profile-section h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #007AFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .profile-details h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .profile-details p {
+            font-size: 14px;
+            color: #666;
+        }
+
         /* 模态框 */
         .modal {
             display: none;
@@ -843,11 +909,11 @@
     <div class="main-container">
         <!-- 侧边栏 -->
         <div class="sidebar">
-            <div class="user-profile">
+            <div class="user-profile" onclick="showProfile()">
                 <div class="user-avatar">张</div>
                 <div class="user-info">
-                    <h3>张三</h3>
-                    <p>管理员</p>
+                    <h3 id="current-username">张三</h3>
+                    <p id="current-role">管理员</p>
                 </div>
             </div>
             <ul class="sidebar-menu">
@@ -866,7 +932,7 @@
             <!-- 欢迎区域 -->
             <div id="welcome-section" class="content-section">
                 <div class="welcome-section">
-                    <h2>欢迎回家，张三！</h2>
+                    <h2>欢迎回家，<span id="welcome-username">张三</span>！</h2>
                     <p>今天是 <span id="current-date">2025年1月21日</span>，气温宜人，适合外出活动。</p>
                     <p>您有 <b>2条新消息</b> 和 <b>1个待办事项</b>。</p>
                     <button class="action-btn" onclick="showModal('add-event-modal')">添加新日程</button>
@@ -963,6 +1029,69 @@
                             <span>5条消息</span>
                             <a href="#" onclick="showSection('notifications-section'); return false;">查看全部</a>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 个人信息 -->
+            <div id="profile-section" class="content-section" style="display: none;">
+                <h2>个人信息</h2>
+                <div class="profile-section">
+                    <div class="profile-info">
+                        <div class="profile-avatar">张</div>
+                        <div class="profile-details">
+                            <h4 id="profile-username">张三</h4>
+                            <p id="profile-role">管理员</p>
+                        </div>
+                    </div>
+                    <p>管理您的个人资料和账户设置。</p>
+                </div>
+
+                <div class="settings-section">
+                    <h3>账户设置</h3>
+                    <div class="settings-item" onclick="showModal('edit-profile-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">👤</div>
+                            <div class="settings-item-content">
+                                <h4>个人信息</h4>
+                                <p>修改您的个人资料</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                    <div class="settings-item" onclick="showModal('password-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">🔒</div>
+                            <div class="settings-item-content">
+                                <h4>密码设置</h4>
+                                <p>更改您的登录密码</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>通知设置</h3>
+                    <div class="settings-item" onclick="showModal('notification-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">🔔</div>
+                            <div class="settings-item-content">
+                                <h4>消息通知</h4>
+                                <p>管理通知类型和偏好</p>
+                            </div>
+                        </div>
+                        <span>></span>
+                    </div>
+                    <div class="settings-item" onclick="showModal('email-settings-modal')">
+                        <div class="settings-item-left">
+                            <div class="settings-item-icon">📧</div>
+                            <div class="settings-item-content">
+                                <h4>邮件设置</h4>
+                                <p>配置邮件通知</p>
+                            </div>
+                        </div>
+                        <span>></span>
                     </div>
                 </div>
             </div>
@@ -1115,6 +1244,14 @@
                     <button onclick="showModal('add-photo-modal')" style="background: #007AFF; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer;">上传照片</button>
                 </div>
 
+                <div class="album-filters">
+                    <span class="album-filter active">全部</span>
+                    <span class="album-filter">节日</span>
+                    <span class="album-filter">生日</span>
+                    <span class="album-filter">旅行</span>
+                    <span class="album-filter">聚会</span>
+                </div>
+
                 <div class="photo-grid">
                     <div class="photo-item">
                         <img src="https://via.placeholder.com/400x400" alt="家庭照片">
@@ -1139,17 +1276,6 @@
                     <div class="photo-item">
                         <img src="https://via.placeholder.com/400x400" alt="家庭照片">
                         <div class="photo-overlay">周末野餐</div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 30px;">
-                    <h3 style="margin-bottom: 15px;">相册分类</h3>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">全部</span>
-                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">节日</span>
-                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">生日</span>
-                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">旅行</span>
-                        <span style="background: white; padding: 8px 15px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); cursor: pointer;">聚会</span>
                     </div>
                 </div>
             </div>
@@ -1428,10 +1554,6 @@
                     <textarea id="photo-description" placeholder="请输入照片描述" style="height: 100px;"></textarea>
                 </div>
                 <div class="modal-form-group">
-                    <label for="photo-upload">选择照片</label>
-                    <input type="file" id="photo-upload" accept="image/*">
-                </div>
-                <div class="modal-form-group">
                     <label for="photo-album">相册</label>
                     <select id="photo-album">
                         <option value="all">全部</option>
@@ -1440,6 +1562,10 @@
                         <option value="travel">旅行</option>
                         <option value="parties">聚会</option>
                     </select>
+                </div>
+                <div class="modal-form-group">
+                    <label for="photo-upload">选择照片</label>
+                    <input type="file" id="photo-upload" accept="image/*">
                 </div>
             </div>
             <div class="modal-actions">
@@ -1679,6 +1805,9 @@
     </div>
 
     <script>
+        // 全局变量 - 当前用户信息
+        let currentUser = null;
+
         // 登录功能
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -1691,10 +1820,116 @@
                 return;
             }
 
-            // 模拟登录成功
-            document.querySelector('.login-container').style.display = 'none';
-            document.querySelector('.main-container').style.display = 'block';
+            // 模拟登录请求
+            const users = [
+                { username: 'zhuha', password: 'zhuha106424', role: 'admin' },
+                { username: 'test1', password: 'test1', role: 'user' },
+                { username: 'test2', password: 'test2', role: 'user' }
+            ];
+
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                // 登录成功
+                currentUser = user;
+                document.querySelector('.login-container').style.display = 'none';
+                document.querySelector('.main-container').style.display = 'block';
+
+                // 更新用户信息显示
+                document.getElementById('current-username').innerText = user.username;
+                document.getElementById('current-role').innerText = user.role;
+                document.getElementById('welcome-username').innerText = user.username;
+                document.getElementById('profile-username').innerText = user.username;
+                document.getElementById('profile-role').innerText = user.role;
+                document.querySelector('.user-avatar').innerText = user.username.charAt(0);
+
+                // 加载初始数据
+                loadInitialData();
+            } else {
+                // 登录失败
+                document.querySelector('.error-msg').style.display = 'block';
+                document.querySelector('.error-msg').innerText = '用户名或密码错误';
+            }
         });
+
+        // 加载初始数据
+        function loadInitialData() {
+            // 这里应该有从后端加载数据的代码
+            // 为了演示，我们使用模拟数据
+            loadMessages();
+            loadPhotos();
+        }
+
+        // 加载消息
+        function loadMessages() {
+            // 模拟从后端获取消息
+            const messages = [
+                { id: 1, sender: '李四', content: '明早有家庭早餐，请准时参加', timestamp: new Date().toISOString(), read: false },
+                { id: 2, sender: '系统', content: '家庭设备更新已完成', timestamp: new Date(Date.now() - 3600000).toISOString(), read: false },
+                { id: 3, sender: '王五', content: '我已经安全到家', timestamp: new Date(Date.now() - 86400000).toISOString(), read: true },
+                { id: 4, sender: '系统', content: '家庭网络已连接', timestamp: new Date(Date.now() - 172800000).toISOString(), read: true },
+                { id: 5, sender: '张三', content: '我已购买了家庭所需用品', timestamp: new Date(Date.now() - 259200000).toISOString(), read: true }
+            ];
+
+            // 更新消息界面
+            const messagesContainer = document.getElementById('notifications-section').querySelector('.notification-list');
+            messagesContainer.innerHTML = '';
+
+            messages.forEach(message => {
+                const messageItem = document.createElement('li');
+                messageItem.className = 'notification-item';
+                messageItem.onclick = () => markAsRead(message.id);
+                messageItem.innerHTML = `
+                    <div class="notification-icon">📧</div>
+                    <div class="notification-content">
+                        <h4>${message.sender}</h4>
+                        <p>${message.content}</p>
+                    </div>
+                    <div class="notification-time ${!message.read ? 'unread' : ''}">${formatTime(message.timestamp)}</div>
+                `;
+                messagesContainer.appendChild(messageItem);
+            });
+        }
+
+        // 加载相册
+        function loadPhotos() {
+            // 模拟从后端获取照片
+            const photos = [
+                { id: 1, title: '2024年家庭聚会', description: '全家福照片', album: '节日', url: 'https://via.placeholder.com/400x400?text=家庭聚会' },
+                { id: 2, title: '王五的生日', description: '生日派对照片', album: '生日', url: 'https://via.placeholder.com/400x400?text=生日派对' },
+                { id: 3, title: '春季郊游', description: '春天的郊游', album: '旅行', url: 'https://via.placeholder.com/400x400?text=春季郊游' },
+                { id: 4, title: '新年晚餐', description: '除夕夜的晚餐', album: '节日', url: 'https://via.placeholder.com/400x400?text=新年晚餐' },
+                { id: 5, title: '李四的毕业典礼', description: '恭喜毕业', album: '聚会', url: 'https://via.placeholder.com/400x400?text=毕业典礼' },
+                { id: 6, title: '周末野餐', description: '阳光明媚的周末', album: '聚会', url: 'https://via.placeholder.com/400x400?text=周末野餐' }
+            ];
+
+            // 更新相册界面
+            const photoGrid = document.getElementById('photos-section').querySelector('.photo-grid');
+            photoGrid.innerHTML = '';
+
+            photos.forEach(photo => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `
+                    <img src="${photo.url}" alt="${photo.title}">
+                    <div class="photo-overlay">${photo.title}</div>
+                `;
+                photoGrid.appendChild(photoItem);
+            });
+
+            // 更新相册分类
+            const albumsContainer = document.getElementById('photos-section').querySelector('.album-filters');
+            const albums = [...new Set(photos.map(p => p.album))];
+            albumsContainer.innerHTML = '';
+
+            albums.forEach(album => {
+                const albumFilter = document.createElement('span');
+                albumFilter.className = 'album-filter';
+                albumFilter.innerText = album;
+                albumFilter.onclick = () => filterPhotos(album);
+                albumsContainer.appendChild(albumFilter);
+            });
+        }
 
         // 显示/隐藏内容区域
         function showSection(sectionId) {
@@ -1729,26 +1964,9 @@
                 return;
             }
 
-            // 这里应该有发送到服务器的代码
+            // 这里应该有发送到后端的代码
             alert(`已添加成员: ${name}`);
             closeModal('add-member-modal');
-            
-            // 模拟刷新列表
-            const memberList = document.getElementById('family-members').querySelector('.member-list');
-            const newMember = document.createElement('li');
-            newMember.className = 'member-item';
-            newMember.innerHTML = `
-                <div class="member-avatar" style="background: #${Math.floor(Math.random()*16777215).toString(16).padStart(6, '0')};">${name.charAt(0)}</div>
-                <div class="member-info">
-                    <h4>${name}</h4>
-                    <p>新成员</p>
-                </div>
-                <div class="member-actions">
-                    <button onclick="editMember('${name}')">编辑</button>
-                    <button onclick="deleteMember('${name}')">删除</button>
-                </div>
-            `;
-            memberList.appendChild(newMember);
         }
 
         // 编辑家庭成员
@@ -1760,14 +1978,8 @@
         // 删除家庭成员
         function deleteMember(name) {
             if (confirm(`确定要删除成员: ${name} 吗？`)) {
+                // 这里应该有发送到后端的代码
                 alert(`已删除成员: ${name}`);
-                // 这里应该有发送到服务器的代码
-                
-                // 模拟从列表中删除
-                const memberItem = document.querySelector(`.member-item h4:contains("${name}")`).closest('.member-item');
-                if (memberItem) {
-                    memberItem.remove();
-                }
             }
         }
 
@@ -1777,8 +1989,8 @@
             if (statusElement) {
                 statusElement.textContent = status ? '已开启' : '已关闭';
                 statusElement.className = status ? 'device-status' : 'device-status off';
+                // 这里应该有发送到后端的代码
                 alert(`${deviceId} 已${status ? '开启' : '关闭'}`);
-                // 这里应该有发送到服务器的代码
             }
         }
 
@@ -1790,48 +2002,38 @@
                 return;
             }
 
-            // 这里应该有发送到服务器的代码
+            // 这里应该有发送到后端的代码
             alert(`已添加设备: ${name}`);
             closeModal('add-device-modal');
-            
-            // 模拟刷新列表
-            const deviceGrid = document.getElementById('devices-section').querySelector('.device-grid');
-            const newDevice = document.createElement('div');
-            newDevice.className = 'device-item';
-            newDevice.innerHTML = `
-                <div class="device-header">
-                    <h4>${name}</h4>
-                    <label class="device-toggle">
-                        <input type="checkbox" onchange="toggleDevice('${name}', this.checked)">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <div class="device-status off">已关闭</div>
-            `;
-            deviceGrid.appendChild(newDevice);
         }
 
         // 添加照片
         function addPhoto() {
             const title = document.getElementById('photo-title').value;
+            const description = document.getElementById('photo-description').value;
+            const album = document.getElementById('photo-album').value;
+
             if (!title) {
                 alert('请输入照片标题');
                 return;
             }
 
-            // 这里应该有发送到服务器的代码
+            // 模拟图片URL
+            const photoUrl = `https://via.placeholder.com/400x400?text=${title}`;
+
+            // 这里应该有发送到后端的代码
             alert(`已上传照片: ${title}`);
             closeModal('add-photo-modal');
-            
-            // 模拟刷新照片列表
+
+            // 更新相册显示
             const photoGrid = document.getElementById('photos-section').querySelector('.photo-grid');
-            const newPhoto = document.createElement('div');
-            newPhoto.className = 'photo-item';
-            newPhoto.innerHTML = `
-                <img src="https://via.placeholder.com/400x400" alt="${title}">
+            const photoItem = document.createElement('div');
+            photoItem.className = 'photo-item';
+            photoItem.innerHTML = `
+                <img src="${photoUrl}" alt="${title}">
                 <div class="photo-overlay">${title}</div>
             `;
-            photoGrid.appendChild(newPhoto);
+            photoGrid.appendChild(photoItem);
         }
 
         // 添加日程
@@ -1847,10 +2049,10 @@
                 return;
             }
 
-            // 这里应该有发送到服务器的代码
+            // 这里应该有发送到后端的代码
             alert(`已添加日程: ${title}`);
             closeModal('add-event-modal');
-            
+
             // 更新日历显示
             updateCalendar();
         }
@@ -1986,10 +2188,36 @@
             alert(`深色模式 ${isDarkMode ? '已开启' : '已关闭'}`);
         }
 
-        // 退出登录
-        function logout() {
-            document.querySelector('.login-container').style.display = 'block';
-            document.querySelector('.main-container').style.display = 'none';
+        // 显示个人信息页面
+        function showProfile() {
+            showSection('profile-section');
+        }
+
+        // 切换到个人信息
+        document.querySelector('.user-profile').addEventListener('click', showProfile);
+
+        // 相册分类筛选
+        document.querySelectorAll('.album-filter').forEach(filter => {
+            filter.addEventListener('click', function() {
+                document.querySelectorAll('.album-filter').forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                filterPhotos(this.innerText);
+            });
+        });
+
+        // 筛选照片
+        function filterPhotos(album) {
+            const photoItems = document.querySelectorAll('.photo-item');
+            
+            if (album === '全部') {
+                photoItems.forEach(item => item.style.display = 'block');
+            } else {
+                // 在实际应用中，这里应该根据相册名称筛选照片
+                photoItems.forEach(item => {
+                    // 这里只是演示，实际应该根据照片的相册属性来筛选
+                    item.style.display = Math.random() > 0.5 ? 'block' : 'none';
+                });
+            }
         }
 
         // 初始化
