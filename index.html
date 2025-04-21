@@ -3,56 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>系统登录</title>
+    <title>家庭门户系统</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: #f5f5f7;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
+        /* 动态背景 */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #f9f9ff 0%, #eef2f5 100%);
+            overflow: hidden;
+        }
+
+        .bg-animation:before {
+            content: "";
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            top: -100%;
+            left: -50%;
+            background-image: 
+                radial-gradient(circle, rgba(200,220,255,0.2) 10%, transparent 10%),
+                radial-gradient(circle, rgba(255,220,230,0.2) 20%, transparent 20%),
+                radial-gradient(circle, rgba(220,255,230,0.2) 15%, transparent 15%);
+            background-size: 100px 100px;
+            animation: animateBackground 30s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes animateBackground {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 登录界面 */
         .login-container {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.92);
             padding: 40px;
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            width: 400px;
-            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            width: 420px;
+            backdrop-filter: blur(8px);
+            margin: 100px auto;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .apple-logo {
-            width: 40px;
+        .login-container:hover {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .logo {
+            width: 48px;
             margin-bottom: 30px;
-            filter: brightness(0) invert(1);
+            filter: brightness(0) saturate(100%) invert(24%) sepia(89%) saturate(2597%) hue-rotate(201deg) brightness(98%) contrast(92%);
         }
 
         h1 {
-            color: #fff;
-            font-size: 24px;
+            color: #1a1a1a;
+            font-size: 28px;
             margin-bottom: 30px;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
         .input-group {
             margin-bottom: 25px;
+            position: relative;
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #fff;
+            padding: 16px;
+            background: rgba(245, 245, 247, 0.8);
+            border: 1px solid rgba(200, 200, 207, 0.4);
+            border-radius: 12px;
+            color: #1a1a1a;
             font-size: 16px;
             transition: all 0.3s ease;
         }
@@ -60,43 +102,288 @@
         input:focus {
             outline: none;
             border-color: #007AFF;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(245, 245, 247, 0.95);
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
         }
 
         button {
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             background: #007AFF;
             color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
         button:hover {
             background: #0063CC;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
         }
 
         .error-msg {
             color: #ff453a;
             margin-top: 15px;
             display: none;
+            font-size: 14px;
         }
 
         .footer-text {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(60, 60, 67, 0.6);
             margin-top: 30px;
             font-size: 13px;
             text-align: center;
         }
+
+        /* 主界面 - 默认隐藏 */
+        .main-container {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        /* 顶部导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007AFF;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #007AFF;
+        }
+
+        /* 欢迎区域 */
+        .welcome-section {
+            background: linear-gradient(135deg, #007AFF 0%, #0040FF 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 30px rgba(0, 122, 255, 0.2);
+        }
+
+        .welcome-title {
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        /* 功能卡片 */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 122, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .card-icon img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .card-desc {
+            color: rgba(60, 60, 67, 0.7);
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(0, 122, 255, 0.1);
+            color: #007AFF;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .card-btn:hover {
+            background: rgba(0, 122, 255, 0.2);
+        }
+
+        /* 日历区域 */
+        .calendar-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .calendar-header {
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+            color: #007AFF;
+        }
+
+        .calendar-day {
+            background: rgba(245, 245, 247, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .calendar-day:hover {
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        .calendar-day.today {
+            background: #007AFF;
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.event {
+            position: relative;
+        }
+
+        .calendar-day.event:after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ff453a;
+            border-radius: 50%;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* 家庭成员区域 */
+        .family-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .family-members {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+        }
+
+        .family-member {
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(245, 245, 247, 0.8);
+            margin: 0 auto 15px;
+            overflow: hidden;
+            border: 3px solid rgba(0, 122, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .family-member:hover .member-avatar {
+            border-color: rgba(0, 122, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .member-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: rgba(60, 60, 67, 0.7);
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <img src="https://www.apple.com.cn/ac/globalnav/7/zh_CN/images/be15095f-5a20-57ff-9c70-8d46b63f5b42/globalnav_apple_image__cxwwnrj0urau_large.svg" class="apple-logo" alt="Logo">
-        <h1>登录系统</h1>
+    <!-- 动态背景 -->
+    <div class="bg-animation"></div>
+
+    <!-- 登录界面 -->
+    <div class="login-container" id="loginContainer">
+        <img src="https://www.apple.com.cn/ac/globalnav/7/zh_CN/images/be15095f-5a20-57ff-9c70-8d46b63f5b42/globalnav_apple_image__cxwwnrj0urau_large.svg" class="logo" alt="Logo">
+        <h1>欢迎回家</h1>
         
         <div class="input-group">
             <input type="text" id="username" placeholder="用户名" autocomplete="username">
@@ -109,15 +396,175 @@
         <div class="error-msg" id="errorMsg">用户名或密码不正确</div>
         <button onclick="login()">登录</button>
         
-        <p class="footer-text">您的账号将用于访问所有系统服务</p>
+        <p class="footer-text">家庭门户系统 © 2023</p>
+    </div>
+
+    <!-- 主界面 -->
+    <div class="main-container" id="mainContainer">
+        <!-- 导航栏 -->
+        <div class="navbar">
+            <div class="nav-logo">Family Hub</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">首页</a>
+                <a href="#" class="nav-link">日历</a>
+                <a href="#" class="nav-link">相册</a>
+                <a href="#" class="nav-link">设置</a>
+            </div>
+        </div>
+
+        <!-- 欢迎区域 -->
+        <div class="welcome-section">
+            <h2 class="welcome-title">欢迎回家, <span id="welcomeName">家人</span>!</h2>
+            <p class="welcome-subtitle">今天是美好的一天，让我们一起享受家庭时光</p>
+        </div>
+
+        <!-- 功能卡片 -->
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-icon">
+                    <img src="https://img.icons8.com/ios/50/007AFF/calendar--v1.png" alt="日历">
+                </div>
+                <h3 class="card-title">家庭日历</h3>
+                <p class="card-desc">查看和管理家庭成员的日程安排，不错过任何重要事件</p>
+                <a href="#" class="card-btn">查看日历</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">
+                    <img src="https://img.icons8.com/ios/50/007AFF/family.png" alt="家庭">
+                </div>
+                <h3 class="card-title">家庭相册</h3>
+                <p class="card-desc">珍藏家庭美好时刻，与家人共享珍贵回忆</p>
+                <a href="#" class="card-btn">浏览照片</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">
+                    <img src="https://img.icons8.com/ios/50/007AFF/shopping-cart.png" alt="购物">
+                </div>
+                <h3 class="card-title">家庭购物清单</h3>
+                <p class="card-desc">共同管理家庭购物需求，实时同步更新</p>
+                <a href="#" class="card-btn">查看清单</a>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">
+                    <img src="https://img.icons8.com/ios/50/007AFF/meal.png" alt="餐食">
+                </div>
+                <h3 class="card-title">本周食谱</h3>
+                <p class="card-desc">规划家庭健康饮食，让每一餐都充满爱</p>
+                <a href="#" class="card-btn">查看食谱</a>
+            </div>
+        </div>
+
+        <!-- 日历区域 -->
+        <div class="calendar-section">
+            <h3 class="section-title">本月家庭日程</h3>
+            <div class="calendar">
+                <div class="calendar-header">日</div>
+                <div class="calendar-header">一</div>
+                <div class="calendar-header">二</div>
+                <div class="calendar-header">三</div>
+                <div class="calendar-header">四</div>
+                <div class="calendar-header">五</div>
+                <div class="calendar-header">六</div>
+                
+                <!-- 日历日期 - 示例 -->
+                <div class="calendar-day">28</div>
+                <div class="calendar-day">29</div>
+                <div class="calendar-day">30</div>
+                <div class="calendar-day">31</div>
+                <div class="calendar-day">1</div>
+                <div class="calendar-day">2</div>
+                <div class="calendar-day">3</div>
+                
+                <div class="calendar-day">4</div>
+                <div class="calendar-day">5</div>
+                <div class="calendar-day">6</div>
+                <div class="calendar-day">7</div>
+                <div class="calendar-day">8</div>
+                <div class="calendar-day">9</div>
+                <div class="calendar-day">10</div>
+                
+                <div class="calendar-day">11</div>
+                <div class="calendar-day event">12</div>
+                <div class="calendar-day">13</div>
+                <div class="calendar-day">14</div>
+                <div class="calendar-day">15</div>
+                <div class="calendar-day">16</div>
+                <div class="calendar-day">17</div>
+                
+                <div class="calendar-day">18</div>
+                <div class="calendar-day">19</div>
+                <div class="calendar-day">20</div>
+                <div class="calendar-day event">21</div>
+                <div class="calendar-day">22</div>
+                <div class="calendar-day">23</div>
+                <div class="calendar-day">24</div>
+                
+                <div class="calendar-day today">25</div>
+                <div class="calendar-day">26</div>
+                <div class="calendar-day">27</div>
+                <div class="calendar-day">28</div>
+                <div class="calendar-day">29</div>
+                <div class="calendar-day">30</div>
+                <div class="calendar-day">1</div>
+            </div>
+        </div>
+
+        <!-- 家庭成员区域 -->
+        <div class="family-section">
+            <h3 class="section-title">家庭成员</h3>
+            <div class="family-members">
+                <div class="family-member">
+                    <div class="member-avatar">
+                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-male-circle.png" alt="爸爸">
+                    </div>
+                    <div class="member-name">爸爸</div>
+                    <div class="member-role">管理员</div>
+                </div>
+                
+                <div class="family-member">
+                    <div class="member-avatar">
+                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-female-circle.png" alt="妈妈">
+                    </div>
+                    <div class="member-name">妈妈</div>
+                    <div class="member-role">管理员</div>
+                </div>
+                
+                <div class="family-member">
+                    <div class="member-avatar">
+                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-male-circle.png" alt="小明">
+                    </div>
+                    <div class="member-name">小明</div>
+                    <div class="member-role">成员</div>
+                </div>
+                
+                <div class="family-member">
+                    <div class="member-avatar">
+                        <img src="https://img.icons8.com/ios-filled/50/007AFF/user-female-circle.png" alt="小红">
+                    </div>
+                    <div class="member-name">小红</div>
+                    <div class="member-role">成员</div>
+                </div>
+                
+                <div class="family-member">
+                    <div class="member-avatar">
+                        <img src="https://img.icons8.com/ios-filled/50/007AFF/dog.png" alt="旺财">
+                    </div>
+                    <div class="member-name">旺财</div>
+                    <div class="member-role">宠物</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         // 预定义用户数据
         const users = [
-            { username: 'zhuha', password: 'zhuha106424', role: 'Admin' },
-            { username: 'test1', password: 'test1', role: 'User' },
-            { username: 'test2', password: 'test2', role: 'User' }
+            { username: 'zhuha', password: 'zhuha106424', role: 'Admin', name: '管理员' },
+            { username: 'test1', password: 'test1', role: 'User', name: '测试用户1' },
+            { username: 'test2', password: 'test2', role: 'User', name: '测试用户2' }
         ];
 
         function login() {
@@ -130,12 +577,17 @@
 
             if (user) {
                 errorMsg.style.display = 'none';
-                alert(`登录成功！欢迎 ${user.username}（${user.role}）`);
-                // 根据角色跳转到不同页面（示例）
+                
+                // 显示欢迎信息
+                document.getElementById('welcomeName').textContent = user.name;
+                
+                // 切换界面
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('mainContainer').style.display = 'block';
+                
+                // 根据角色显示不同内容
                 if(user.role === 'Admin') {
-                    window.location.href = 'admin_dashboard.html';
-                } else {
-                    window.location.href = 'user_dashboard.html';
+                    // 管理员特有功能可以在这里添加
                 }
             } else {
                 errorMsg.style.display = 'block';
