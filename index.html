@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>家庭门户系统</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-animation"></div>
+
+<!-- 登录 -->
+<div class="login-container">
+    <h1>家庭门户系统</h1>
+    <form id="login-form">
+        <div class="input-group">
+            <input type="text" id="username" placeholder="用户名" required>
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="密码" required>
+        </div>
+        <button type="submit">登录</button>
+    </form>
+    <div class="error-msg" id="errorMsg"></div>
+    <p class="footer-text">默认账号：zhuha / zhuha106424</p>
+</div>
+
+<!-- 主界面 -->
+<div class="main-container">
+    <div class="top-bar">
+        <button onclick="exportData()">📥 导出</button>
+        <button onclick="document.getElementById('importFile').click()">📤 导入</button>
+        <input type="file" id="importFile" style="display:none" onchange="importData(this)">
+        <button class="btn-danger" onclick="resetAll()">🔄 重置</button>
+    </div>
+
+    <div class="sidebar">
+        <div class="user-profile">
+            <div class="user-avatar">张</div>
+            <div class="user-info">
+                <h3 id="current-username">张三</h3>
+                <p>管理员</p>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active">🏠 首页</a></li>
+            <li><a href="#">👥 家庭成员</a></li>
+            <li><a href="#">🔌 家庭设备</a></li>
+            <li><a href="#">📅 家庭日历</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="welcome-section">
+            <h2>欢迎回家，<span id="welcome-username">张三</span>！</h2>
+            <p>今天是 <span id="current-date"></span></p>
+            <button class="action-btn">添加新日程</button>
+        </div>
+
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-header"><h3>家庭成员</h3></div>
+                <div class="card-content">数据已存入 localStorage</div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h3>家庭设备</h3></div>
+                <div class="card-content">刷新不会丢失</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">© 2025 家庭门户系统</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
